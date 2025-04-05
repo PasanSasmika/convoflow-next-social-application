@@ -18,7 +18,7 @@ async function Sidebar() {
   if(!user)
   return null;
 
-  console.log({user})
+  // console.log({user})
 
   return (
     <div className="sticky top-20">
