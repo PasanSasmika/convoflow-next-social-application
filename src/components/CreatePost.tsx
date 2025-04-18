@@ -9,6 +9,7 @@ import { Textarea } from './ui/textarea';
 import { Avatar, AvatarImage } from './ui/avatar';
 import { createPost } from '@/actions/post.action';
 import toast from 'react-hot-toast';
+import ImageUpload from './imageUpload';
 
 
 function CreatePost() {
@@ -25,7 +26,7 @@ function CreatePost() {
 
         try {
           const result =   await createPost(content, imageUrl);
-          if(result.success){
+          if(result?.success){
             setContent("");
             setImageUrl("");
             setShowImageUpload(false);
@@ -60,14 +61,14 @@ function CreatePost() {
 
         {(showImageUpload || imageUrl) && (
           <div className="border rounded-lg p-4">
-            {/* <ImageUpload
+            <ImageUpload
               endpoint="postImage"
               value={imageUrl}
               onChange={(url) => {
                 setImageUrl(url);
                 if (!url) setShowImageUpload(false);
               }}
-            /> */}
+            />
           </div>
         )}
 
