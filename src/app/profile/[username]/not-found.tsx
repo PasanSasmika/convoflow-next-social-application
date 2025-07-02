@@ -23,7 +23,7 @@ export default function NotFound() {
               <Button variant="default" asChild>
                 <Link href="/">
                   <HomeIcon className="mr-2 size-4" />
-                  Back to Home
+                  Back to Home....
                 </Link>
               </Button>
             </div>
