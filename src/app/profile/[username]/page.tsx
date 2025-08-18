@@ -2,37 +2,33 @@ import { getProfileByUsername, getUserLikedPosts, getUserPosts, isFollowing } fr
 import { notFound } from "next/navigation";
 import ProfilePageClient from "./ProfilePageClient";
 
-
-export async function generateMetaData({ params }: {params: {username: string } }){
+export async function generateMetadata({ params }: { params: { username: string } }) {
     const user = await getProfileByUsername(params.username);
-    if(!user) return;
+    if (!user) return;
 
-    return{
+    return {
         title: `${user.name ?? user.username}`,
         description: user.bio || `Check out ${user.username}'s profile.`,
     };
-    
 }
 
-
-
-async function ProfilePageServer({ params }: {params:{username: string}}){
+async function ProfilePageServer({ params }: { params: { username: string } }) {
     const user = await getProfileByUsername(params.username);
 
-    if(!user) notFound();
-    const [posts, likedPosts, isCurrentUserFOllowing] = await Promise.all([
+    if (!user) notFound();
+    const [posts, likedPosts, isCurrentUserFollowing] = await Promise.all([
         getUserPosts(user.id),
         getUserLikedPosts(user.id),
         isFollowing(user.id),
     ]);
     return (
         <ProfilePageClient
-            user = {user}
-            posts = {posts}
-            likedPosts = {likedPosts}
-            isFollowing = {isCurrentUserFOllowing}
+            user={user}
+            posts={posts}
+            likedPosts={likedPosts}
+            isFollowing={isCurrentUserFollowing}
         />
-    )
+    );
 }
 
 export default ProfilePageServer;
